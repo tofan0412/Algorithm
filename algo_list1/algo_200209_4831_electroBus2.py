@@ -18,9 +18,8 @@ for tc in range(1, tc_num + 1):
     for bus_stop in range(0, line_info[1] + 1): # 정류장의 수는 0까지 있으므로 +1해야 한다.
         # bus_stop은 현재 버스가 들른 정류장을 의미한다.
 
-        # 만약 movable_distance가 음수이면 도착할 수 없다는 것을 의미한다.
-        if movable_distance < 0:
-            charge_cnt = 0
+        # 마지막 정류장에 도착했으므로 끝낸다.
+        if bus_stop == line_info[1]:
             break
 
         #출발하기 전에, 만약 버스가 충전소가 있는 정류장에 있다면
@@ -41,9 +40,10 @@ for tc in range(1, tc_num + 1):
             if charger_visit_cnt == line_info[2]:
                 # 현재 이동 가능 거리와, 남은 거리를 비교한다.
                 # 남은거리까지 현재 이동 가능 거리로 도달할 수 없는 경우
-                if movable_distance < line_info[1] - bus_stop:
-                    charge_cnt = 0 # 충전 횟수에 0을 주고 for문을 끝낸다.
-                    break
+                if movable_distance < line_info[1] - bus_stop: # 충전이 필요한 상황이다.
+                    movable_distance = line_info[0]  # 충전!
+                    charge_cnt += 1 # 한번 충전한다.
+
                 # 충전소는 없지만, 현재 이동 가능 거리로 마지막까지 도착할 수 있는 경우
                 else:
                     pass
@@ -51,6 +51,11 @@ for tc in range(1, tc_num + 1):
         # 마지막으로, 다음 정류장까지 이동해야 하므로, 이동 가능 거리에서 -1
 
         movable_distance -= 1
+        # 만약 movable_distance가 음수이면 도착할 수 없다는 것을 의미한다.
+
+        if movable_distance < 0:
+            charge_cnt = 0
+            break
 
     # 마지막으로 출력한다 .
     print(f'#{tc} {charge_cnt}')
