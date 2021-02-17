@@ -29,3 +29,33 @@ for tc in range(1, case + 1):
         if result > max:
             max = result
     print(f'#{tc} {max}')
+
+
+# 수업에서 알려준 것처럼, 중복된 계산을 고려해서 다시 짜보자 ...
+
+# Answer
+
+def check(long, short):
+    max_value = -98987123
+    for i in range(len(long)-len(short)+1): # N - M + 1이다.
+        result = 0
+        for j in range(len(short)):
+            result += long[i+j]*short[j]
+
+        if max_value < result:
+            max_value = result
+    return max_value
+
+T = int(input())
+for tc in range(1, T+1):
+    # N, M 리스트의 길이를 의미한다. 3~20
+    N, M = map(int, input().split())
+    A = list(map(int, input().split()))
+    B = list(map(int, input().split()))
+
+    if N > M:
+        ans = check(A,B)
+    else:
+        ans = check(B,A)
+
+    print(f'#{tc} {ans}')
