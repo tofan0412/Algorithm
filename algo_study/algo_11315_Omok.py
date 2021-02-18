@@ -15,6 +15,5 @@ for tc in range(0, T+1):
     # 2차원 좌표에 대해서 검사해야 하므로, 시간복잡도는 O(n**2) 이다.
     for col in range(0, size): # column 방향
         for row in range(0, size): # row 방향
-            # 1. 가로방향에 대해서 검사한다. 가로 방향의 첫번째가 없으면 오목일 수가 없다.
-            if grid[col][row] == 'o'
+
 

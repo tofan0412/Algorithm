@@ -39,3 +39,28 @@ for tc in range(1, T+1):
                     result += 1
 
     print(f'#{tc} {result}')
+
+
+# Answer
+
+arr = [list(map(int, input().split())) for i in range(N)]
+
+arr_r = [[0]*10 for i in range(10)]
+
+cnt = 0
+for i in range(N):
+    r1 = arr[i][0]
+    c1 = arr[i][1]
+    r2 = arr[i][2]
+    c2 = arr[i][3]
+
+    for x in range(r1, r2+1):
+        for y in range(c1, c2 + 1):
+            arr_r[x][y] += arr[i][4]
+
+    for i in range(10):
+        for j in range(10):
+            if arr_r[i][j] == 3:
+                cnt += 1
+
+    print(f'#{tc} {cnt}')
