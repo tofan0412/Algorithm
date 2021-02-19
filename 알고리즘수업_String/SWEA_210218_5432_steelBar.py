@@ -1,6 +1,6 @@
 T = int(input())
 
-for tc in range(1,21):
+for tc in range(1,T+1):
     tmp = input()
     tmp = tmp.replace("()","▼")
 
