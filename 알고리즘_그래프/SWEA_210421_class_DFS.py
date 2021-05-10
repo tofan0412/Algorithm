@@ -8,7 +8,7 @@ def dfs(stack):
             # 방문하지 않았다면
             if visited[i] == 0:
                 stack.append(i)
-                dfs(stack)
+
 
 info = '1 2 1 3 2 4 2 5 4 6 5 6 6 7 3 7'
 info = list(map(int, info.split()))

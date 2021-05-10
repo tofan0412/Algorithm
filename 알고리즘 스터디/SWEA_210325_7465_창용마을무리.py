@@ -41,10 +41,3 @@ for tc in range(1, T+1):
         BFS()
 
     print(f'#{tc} {result}')
-
-
-
-
-
-
-

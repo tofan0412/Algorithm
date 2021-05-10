@@ -6,7 +6,7 @@ def BFS(queue):
     dr = [-1, 1, 0, 0]
     dc = [0, 0, -1, 1]
 
-    while queue: #
+    while queue:
         point = queue.pop(0)
         visited[point[0]][point[1]] = 1 # 방문 처리
         cnt += 1  # 방문한 방의 개수 +1
