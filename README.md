@@ -12,18 +12,20 @@
 
 
 
-| 알고리즘 영역       | 링크                                                         |
+| Tag                 | 문제집                                                       |
 | ------------------- | ------------------------------------------------------------ |
-| 리스트              | https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/List_Example |
-| 백트래킹 & 분할정복 | https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/Backtracking%26DivideAlgo_Example |
-| 그리디              | https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/Greedy_Example |
-| DFS, BFS            | https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/DFS%26BFS_Example |
-| 완전탐색            | https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/BruteForce_Example |
-| 큐                  | https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/Queue_Example |
-| 스택                | https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/Stack_Example |
-| 트리                | https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/Tree_Example |
-| 스트링              | https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/String_Example |
+| 리스트              | [ 바로 가기 ] (https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/List_Example) |
+| 백트래킹 & 분할정복 | [ 바로 가기 ] (https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/Backtracking%26DivideAlgo_Example) |
+| 그리디              | [ 바로 가기 ] (https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/Greedy_Example) |
+| DFS, BFS            | [ 바로 가기 ] (https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/DFS%26BFS_Example) |
+| 완전탐색            | [ 바로 가기 ] (https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/BruteForce_Example) |
+| 큐                  | [ 바로 가기] (https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/Queue_Example) |
+| 스택                | [ 바로 가기] (https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/Stack_Example) |
+| 트리                | [ 바로 가기 ] (https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/Tree_Example) |
+| 스트링              | [ 바로 가기 ] (https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/String_Example) |
 | 동적 프로그래밍     |                                                              |
+
+[바로가기]: https://github.com/tofan0412/algorithm/tree/master/01.%20%EA%B0%9C%EB%85%90%20%EB%B0%8F%20%EC%98%88%EC%A0%9C%20%EB%AC%B8%EC%A0%9C/String_Example
 
 
 
