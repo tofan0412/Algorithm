@@ -29,5 +29,9 @@
 
 👍 당일 문제를 풀면서 해결 못했다면 반드시 패스여부를 기입하고, Notion에 못푼 문제 목록에 해당 문제를 추가할 것
 
+👍 Notion 링크 : https://www.notion.so/Algorithm-739571cee5eb46b29e6e8ea16d166e60
+
+
+
 
 
