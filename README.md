@@ -1,4 +1,9 @@
 # 조웅현의 algorithm
+
+[GitHub MD 작성요령](https://gist.github.com/ihoneymon/652be052a0727ad59601)
+
+<br>
+
 ## ⚾ 참고 교재
 
 - 이것이 취업을 위한 코딩 테스트다 with Python
