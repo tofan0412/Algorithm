@@ -1,17 +1,30 @@
-'''
-그래프를 DFS와 BFS로 탐색한 결과를 출력하는 프로그램을 출력하시오. 단, 방문할 수 있는 정점이 여러 개인 경우
-정점 번호가 작은 것을 먼저 방문하고 더 이상 방문할 수 있는 점이 없는 경우 종료한다.
-M개의 줄에는 간선이 연결하는 두 정점의 번호가 주어진다.
-'''
 from collections import deque
 
-
-def bfs():
-    # 너비 우선 탐색
+# 너비 우선 탐색
+def bfs(N, adj, V):
+    result = []
+    visited = [0] * (N+1)
     queue = deque()
-    return
+    queue.append(V)
 
-def dfs(adj, visited, V): # V는 시작 정점
+    while queue:
+        # 꺼낸 후, 방문 처리한다.
+        now = queue.popleft()
+        visited[now] = 1
+        result.append(now)
+
+        # 인접 리스트(adj) 통해 인접한 정점을 확인하고, 아직 방문하지 않았다면 큐에 쌓는다.
+        # 단, 인접한 정점 중에서 낮은 번호부터 먼저 방문한다.
+        for i in adj[now].sort():
+            if visited[i] != 1:
+                queue.append(i)
+                visited[i] = 1
+    return result
+
+
+def dfs(N, adj, V): # V는 시작 정점
+    visited = [0] * (N+1)
+    result = ''
     # 깊이 우선 탐색
     stack = []
     stack.append(V)
@@ -20,46 +33,30 @@ def dfs(adj, visited, V): # V는 시작 정점
         # 1. stack에서 꺼낸다. 이후 방문 처리한다.
         now = stack.pop()
         visited[now] = 1
+        # result에 넣는다.
+        result += str(now) + ' '
         # 2. 꺼낸 기준 node를 기준으로 주변을 탐색한다.
         for i in adj[now]:
-
-
-    return
+            # 방문이 아직 되어 있지 않다면 stack에 쌓는다.
+            if visited[i] != 1:
+                stack.append(i)
+                break
+    return result
 
 
 N, M, V = map(int, input().split())  # 정점(node)의 개수 N, 간선(edge)의 개수 M, 시작점 V
-adj = [[] for i in range(M+1)] # N이 1에서부터 시작하므로
-visited = [0] * (N + 1) # 1번 노드부터 시작하므로, 0번 노드는 방문 처리
-visited[0] = 1
-
-'''
-[[]] * 10 과 [[] for i in range(10)]의 차이
-전자의 경우 하나의 []를 만들고 10개의 메모리상 주소가 모두 동일한 곳을 가리키고 있다.
-후자의 경우 각각 10개의 []를 만드므로 메모리상 주소가 모두 다르다.
-또한 후자의 경우 리스트 표현식(comprehension)으로 만든 것이다. 원래 코드는 다음과 같다. 
-a = []
-for i in range(3):
-    line = []
-    a.append(line)
-'''
-
-'''
-리스트 표현식은 다음과 같은 예시가 존재한다.
-[식 for 변수 in 리스트
-list(식 for 변수 in 리스트)
-ex)
-a = [i for i in range(10)] # 결과 : [0,1,2,3,4,5,6,7,8,9]
-즉 range(10)으로 0부터 9까지 생성하여 변수 i에 숫자를 꺼내고, 최종적으로 i를 이용하여 
-리스트를 만든다는 뜻이다.
-'''
+adj = [[] for i in range(N+1)] # N이 1에서부터 시작하므로
 
 for i in range(M):
     node1, node2 = map(int, input().split())
     adj[node1].append(node2)
+    adj[node2].append(node1) # 양방향이므로 모두 넣어줘야 한다.
 
 # 먼저 DFS를 수행한다.
-dfs(adj, visited, V)
-
-print(adj)
+print(dfs(N, adj, V))
+# Visited 초기화
+visited = [0] * (N+1)
+# BFS를 수행한다.
+print(bfs(N, adj, V))
 
 
