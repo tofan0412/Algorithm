@@ -9,7 +9,7 @@ def dfs(arr, visited, point):
     while stack:
         now = stack.pop()
         # 방문 처리 한다.
-        if visited[now[0]][now[1]] != 0:
+        if visited[now[0]][now[1]] == 0:
             visited[now[0]][now[1]] = 1
             # 집 갯수를 카운트한다.
             count += 1
@@ -49,6 +49,7 @@ for i in range(N):
                 danji += 1
 
 print(danji)
-print(building_number)
-# for i in building_number:
-#     print(i)
+# building_number sort
+building_number.sort()
+for count in building_number:
+    print(count)
