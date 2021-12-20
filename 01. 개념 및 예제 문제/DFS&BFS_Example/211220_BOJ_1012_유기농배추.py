@@ -1,3 +1,5 @@
+# SILVER2
+
 def dfs(N, M, arr, point):
     global visited
     dr = [-1, 1, 0, 0]

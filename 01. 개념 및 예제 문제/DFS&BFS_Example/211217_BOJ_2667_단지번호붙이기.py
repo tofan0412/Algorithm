@@ -1,3 +1,5 @@
+# SILVER2
+
 def dfs(arr, visited, point):
     count = 0
     dr = [-1, 1, 0, 0]
