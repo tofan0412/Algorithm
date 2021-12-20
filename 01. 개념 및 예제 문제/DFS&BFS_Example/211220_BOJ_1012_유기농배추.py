@@ -1,4 +1,4 @@
-def dfs(arr, point):
+def dfs(N, M, arr, point):
     global visited
     dr = [-1, 1, 0, 0]
     dc = [0, 0, -1, 1]
@@ -16,13 +16,20 @@ def dfs(arr, point):
             # indexError 고려
             if 0 <= nr < N and 0 <= nc < M:
                 # 배추가 심어져 있다면 stack에 추가
-                if arr[nr][nc] != 0:
+                if arr[nr][nc] != 0 and visited[nr][nc] == 0:
                     stack.append([nr, nc])
                     visited[nr][nc] = 1
+            else:
+                continue
+    return 1
 
 
 T = int(input())
-for tc in range(T+1):
+info = []
+arrs = []
+visited_arrs = []
+
+for tc in range(T):
     M, N, K = map(int, input().split()) # 가로길이, 세로길이, 배추가 심어져 있는 곳의 개수
     arr = [[0]*M for _ in range(N)]
     visited = [[0]*M for _ in range(N)]
@@ -31,10 +38,18 @@ for tc in range(T+1):
         col, row = map(int, input().split())
         arr[row][col] = 1
 
-    # 모든 요소에 대해 완전 탐색 실시
-    for row in N:
-        for col in M:
-            # 배추가 심어져 있고, 아직 방문하지 않았다면
-            if arr[row][col] != 0 and visited[row][col] != 0:
-                dfs(arr, [row, col])
+    info.append([M, N, K])
+    arrs.append(arr)
+    visited_arrs.append(visited)
 
+# 입력 받았으면, 실행하자.
+for (index, arr) in enumerate(arrs):
+    result = 0
+    visited = visited_arrs[index]
+    M, N, K = info[index]
+
+    for row in range(N):
+        for col in range(M):
+            if arr[row][col] != 0 and visited[row][col] == 0:
+                result += dfs(N, M, arr, [row, col])
+    print(result)
