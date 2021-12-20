@@ -30,22 +30,20 @@ for row in range(N):
     arr[row] = list(map(int, input().split()))
 
 # 1. 가장 낮은 높이 min_h와 가장 높은 높이 max_h를 센다.
-min_h = 101 # 높이는 1 이상 100 이하의 정수
 max_h = 0 # 높이는 1 이상 100 이하의 정수
 for row in range(N):
     for col in range(N):
-        if arr[row][col] < min_h:
-            min_h = arr[row][col]
         if arr[row][col] > max_h:
             max_h = arr[row][col]
 
 # 2. 가능한 높이의 range에서 안전 영역의 개수를 각각 count
-for height in range(min_h, max_h):
+for height in range(0, max_h+1): # 비가 오지 않는 경우도 존재할 수 있다.
     count = 0
+    visited = [[0]*N for _ in range(N)]
+
     for row in range(N):
         for col in range(N):
-            visited = [[0]*N for _ in range(N)]
-            if visited[row][col] == 0:
+            if visited[row][col] == 0 and arr[row][col] > height:
                 count += solution(arr, N, height, [row, col])
     result.append(count)
 
