@@ -5,6 +5,7 @@ N, K = map(int, input().split())
 seconds = 0
 result = 80000
 
+numbers = set() # Memoization 위해
 queue = deque()
 
 queue.append(N)
@@ -18,13 +19,31 @@ while queue:
         queue.append('sec')
     # 값이 17인 경우, 그 때까지 소모된
     elif now == 17:
-        if result > seconds:
-            result = seconds
-            break
+        result = seconds
+        break
     else:
-        queue.append(now - 1)
-        queue.append(now + 1)
-        queue.append(now * 2)
-
-
+        if not (now - 1) in numbers:
+            number = now - 1
+            if number == 17:
+                result = seconds + 1
+                break
+            else:
+                queue.append(now - 1)
+                numbers.add(now - 1)
+        if not (now + 1) in numbers:
+            number = now + 1
+            if number == 17:
+                result = seconds + 1
+                break
+            else:
+                queue.append(now + 1)
+                numbers.add(now + 1)
+        if not (now * 2) in numbers:
+            number = now * 2
+            if number == 17:
+                result = seconds + 1
+                break
+            else:
+                queue.append(now * 2)
+                numbers.add(now * 2)
 print(result)
