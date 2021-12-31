@@ -1,31 +1,27 @@
 # SILVER5
 # 주의할 점 : N의 최대 수가 1,000,000이다
-def quick_sort(arr, start, end):
-    pivot = (end - start) // 2
+def merge_sort(arr, start, end):
+    if len(arr) <= 1:
+        return arr
 
-    # 종료 조건을 설정하자.
-    if start >= end:
-        return
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid], start, mid-1)
+    right = merge_sort(arr[mid:], mid, end)
 
-    left = start + 1
-    right = end
-    while left <= right:
-        # 왼쪽 -> 오른쪽으로는 피벗보다 큰 수를 찾자.
-        while left <= right and arr[start] <= arr[pivot]:
-            left += 1
-        # 오른쪽 -> 왼쪽으로는 피벗보다 작은 수를 찾자.
-        while right > start and arr[end] >= arr[pivot]:
-            right -= 1
-
-        # 이제 비교해보자.
-        if left <= right:
-            arr[right], arr[left] = arr[left], arr[right]
+    merged = []
+    while len(left) > 0 and len(right) > 0:
+        if left[0] < right[0]:
+            merged.append(left.pop(0))
         else:
-            arr[right], arr[pivot] = arr[pivot], arr[right]
+            merged.append(right.pop(0))
 
-    # 왼쪽, 오른쪽에 대해 각각 퀵 정렬 재수행
-    quick_sort(arr, start, right - 1)
-    quick_sort(arr, right + 1, end)
+    if len(left) > 0:
+        while len(left) > 0:
+            merged.append(left.pop(0))
+    if len(right) > 0:
+        while len(right) > 0:
+            merged.append(right.pop(0))
+    return merged
 
 
 N = int(input())
@@ -34,10 +30,54 @@ for i in range(N):
     number = int(input())
     arr.append(number)
 
-# 3. 퀵 정렬을 이용해보자.
-quick_sort(arr, 0, len(arr) - 1)
+# 3. 병합 정렬을 이용해보자.
+result = merge_sort(arr, 0, len(arr) - 1)
 
-# 문제점 : 퀵 소트의 피벗 값을 start로 하게 되면, 문제가 발생한다...
-
-for number in arr:
+for number in result:
     print(number)
+
+
+###############################
+# 정답 코드는 다음과 같다.
+def merge_sort(array):
+    if len(array) <= 1:
+        return array
+    mid = len(array) // 2
+    left = merge_sort(array[:mid])
+    right = merge_sort(array[mid:])
+
+    i, j, k = 0, 0, 0 # i는 left의 pointer, j는 right의 pointer이다.
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            array[k] = left[i]
+            i += 1
+        else:
+            array[k] = right[j]
+            j += 1
+        k += 1
+
+    if i == len(left):
+        while j < len(right):
+            array[k] = right[j]
+            j += 1
+            k += 1
+    elif j == len(right):
+        while i < len(left):
+            array[k] = left[i]
+            i += 1
+            k += 1
+    return array
+
+
+# 데이터 입력
+n = int(input())
+num = []
+
+for _ in range(n):
+    num.append(int(input()))
+
+num = merge_sort(num)
+
+for i in num:
+    print(i)
