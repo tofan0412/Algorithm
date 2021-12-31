@@ -1,12 +1,12 @@
 # SILVER5
 # 주의할 점 : N의 최대 수가 1,000,000이다
-def merge_sort(arr, start, end):
-    if len(arr) <= 1:
+def merge_sort(array, start, end):
+    if len(array) <= 1:
         return arr
 
-    mid = len(arr) // 2
-    left = merge_sort(arr[:mid], start, mid-1)
-    right = merge_sort(arr[mid:], mid, end)
+    mid = len(array) // 2
+    left = merge_sort(array[:mid], start, mid-1)
+    right = merge_sort(array[mid:], mid, end)
 
     merged = []
     while len(left) > 0 and len(right) > 0:
@@ -46,7 +46,7 @@ def merge_sort(array):
     left = merge_sort(array[:mid])
     right = merge_sort(array[mid:])
 
-    i, j, k = 0, 0, 0 # i는 left의 pointer, j는 right의 pointer이다.
+    i, j, k = 0, 0, 0 # i는 left의 pointer, j는 right의 pointer이다. k는 array의 인덱스이다.
 
     while i < len(left) and j < len(right):
         if left[i] < right[j]:
