@@ -8,8 +8,8 @@ def merge_sort(arr, start, end):
     mid = len(arr) // 2
 
     # 계속 분할한다. 리스트의 길이가 0 또는 1이 될 때까지
-    left = merge_sort(arr[:mid], arr[start], arr[mid-1])
-    right = merge_sort(arr[mid:], arr[mid], arr[end])
+    left = merge_sort(arr[:mid], start, mid-1)
+    right = merge_sort(arr[mid:], mid, end)
 
     # divide가 끝났으면, merge 해주자.
     # 이 과정에서 순서대로 넣어야 한다.
@@ -25,5 +25,17 @@ def merge_sort(arr, start, end):
             merged.append(right[pointer2])
             pointer2 += 1
 
+    # pointer1 == len(left)라면 merged에 남은 right 원소를 넣어주면 된다는 뜻이다. (left, right는 각각 정렬이 완료되어 있으므로)
+    if pointer1 == len(left):
+        while pointer2 != len(right):
+            merged.append(right[pointer2])
+            pointer2 += 1
+    elif pointer2 == len(right):
+        while pointer1 != len(left):
+            merged.append(left[pointer1])
+            pointer1 += 1
     return merged
 
+result = merge_sort(arr, 0, len(arr) - 1)
+
+print(result)
