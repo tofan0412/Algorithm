@@ -1,53 +1,27 @@
 # SILVER2
-# 시작 시간과 끝나는 시간의 범위가 int여서 계수 정렬은 사용할 수 없다.
-
-# 단순히 시작 시간 기준으로 빠른 순서대로 정렬한 함수
-def selection_sort(arr, arr2):
-    for i in range(len(arr)):
-        min_index = i
-        for j in range(i+1, len(arr)):
-            if arr[min_index] > arr[j]:
-                min_index = j
-            # st가 같은 경우에는 ? et를 비교해야 한다.
-            elif arr[min_index] == arr[j]:
-                if arr2[min_index] > arr2[j]:
-                    min_index = j
-                # 그 이외의 경우에는 그냥 min_index 유지
-        arr[min_index], arr[i] = arr[i], arr[min_index]
-        # et 또한 변경해야 한다.
-        # 문제점 : 만약 st가 같다면...
-        arr2[min_index], arr2[i] = arr2[i], arr2[min_index]
-
-
 N = int(input())
-st = []
-et = []
+time = []
 for _ in range(N):
     time1, time2 = map(int, input().split())
-    st.append(time1)
-    et.append(time2)
-selection_sort(st, et)
+    time.append([time1, time2])
 
-result = -1
-for i in range(len(st)):
-    stack = []
-    stack.append([st[i], et[i]])
-    count = 1
-    pointer = i+1
-    while pointer < len(st):
-        now = stack.pop()
-        if now[0] <= st[pointer] < now[1]:
-            # 다시 도로 넣는다.
-            stack.append(now)
-            pointer += 1
-            continue
-        else:
-            stack.append([st[pointer], et[pointer]])
-            count += 1
-            pointer += 1
-    if result < count:
-        result = count
+# 정렬은 내장함수를 이용하자... 시간 초과 뜬다 ㅠㅠ -> 혹시 종료 시간 기준으로 하지 않았기 때문에...?
+time = sorted(time, key=lambda time:time[0])
+# 종료 시간이 빨라야, 더 많은 회의를 집어넣을 수 있다.
+# 이후 종료시간을 기준으로 다시 한번 정렬해 준다. 그 이유 : (9, 10) 과 (10, 10)
+time = sorted(time, key=lambda time:time[1])
 
-print(result)
-
-# 결과 : 시간초과
+now = time[0]
+end_time = now[1] # 종료 시간을 기록해 둔다.
+cnt = 1
+for lecture in time[1:]: # 자기 자신은 제외해야 한다.
+    if now[0] < lecture[0] < now[1]:
+        continue
+    if lecture[0] < end_time:
+        continue
+    # 시작 시간이 현재 강의 시간과 겹치지 않으며, 현재 시작한 강의 이후에 시작하는 강의인 경우
+    else:
+        cnt += 1
+        now = lecture
+        end_time = now[1]
+print(cnt)
