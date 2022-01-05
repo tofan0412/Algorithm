@@ -1,77 +1,55 @@
 # SILVER2
-def merge_sort(arr, arr2):
+def merge_sort(arr):
     if len(arr) <= 1:
-        return arr, arr2
+        return arr
 
     mid = len(arr) // 2
-
-    # arr, arr2를 모두 반환하므로 굳이 나눌 필요가 없다.
-    returned_left = merge_sort(arr[:mid], arr2[:mid])
-    returned_right = merge_sort(arr[mid:], arr2[mid:])
-
-    left = returned_left[0]
-    right = returned_right[0]
-    left_index = returned_left[1]
-    right_index = returned_right[1]
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
 
     i = 0
     j = 0
     merged = []
-    merged_index = []
-
     while i < len(left) and j < len(right):
-        if left[i] < right[j]:
+        if left[i][0] < right[j][0]:
             merged.append(left[i])
-            merged_index.append(left_index[i])
             i += 1
         else:
             merged.append(right[j])
-            merged_index.append(right_index[j])
             j += 1
 
     if i == len(left):
         while j < len(right):
             merged.append(right[j])
-            merged_index.append(right_index[j])
             j += 1
     if j == len(right):
         while i < len(left):
             merged.append(left[i])
-            merged_index.append(left_index[i])
             i += 1
 
-    return merged, merged_index
+    return merged
 
 
 N = int(input())
-array = list(map(int, input().split()))
-origin_index = [i for i in range(len(array))]
+tmp = list(map(int, input().split()))
+array = [[v, i] for (i, v) in enumerate(tmp)]
 
-# 병합 정렬로 정렬하자. 정렬할 때, origin_index 값도 맞춰서 함께 변경해줘야 한다.
-result = merge_sort(array, origin_index)
-compress_index = [-1]
+result = merge_sort(array)
 
-index = 0 # iterable을 위한 인덱스
-before_number = 1000000001
-while len(compress_index) < len(result[0]) + 1:
-    number = result[0][index]
+result[0].append(0) # 첫 항에 인덱스 기록해둔다.
+for (i, v) in enumerate(result):
+    # num은 [-10, 2] 와 같이 v와 원본 index를 포함하고 있는 객체이다.
+    if i == 0:
+        continue
 
-    if before_number == number:
-        compress_index.append(compress_index[-1])
+    # 1. 이전 수와 같다면 인덱스 그대로
+    if v[0] == result[i-1][0]:
+        v.append(result[i-1][2])
+    # 2. 이전 수와 다르다면 +1한 인덱스 추가
     else:
-        compress_index.append(compress_index[-1] + 1)
-    before_number = number
-    index += 1
+        v.append(result[i-1][2] + 1)
 
-# 이제 마지막으로, compress_index를 원래 순서대로 정렬해 준다.
-compress_index = compress_index[1:] # 첫번째 -1은 빼준다.
-answer = [0] * len(compress_index)
-
-for (index, order) in enumerate(result[1]):
-    answer[order] = compress_index[index]
-
-answer_str = ''
-for ans in answer:
-    answer_str += str(ans) + ' '
-
-print(answer_str)
+# 다시 원래 인덱스 기준으로 정렬하고, 좌표압축 기준 인덱스를 출력한다.
+result = sorted(result, key=lambda x:x[1])
+for arr in result:
+    print(arr[2], end=' ')
