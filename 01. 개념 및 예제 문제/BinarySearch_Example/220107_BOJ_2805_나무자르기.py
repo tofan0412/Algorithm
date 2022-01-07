@@ -49,14 +49,19 @@ height = merge_sort(height)
 H = height[-1] - 1
 min_h = 0
 
-for h in range(H, 0, -1):
+# 나무의 최대 개수는 최대 100만개이다.
+# 임의의 절단 높이 H에 대해, 절단한 후 나무 길이의 총합을 구하는 시간 복잡도는 O(N^2)이다.
+# 절단기에 설정할 수 있는 높이는 양의 정수 또는 0이다.
+for h in range(H, -1, -1):
     i = binary_search(height, h, 0, len(height) - 1)
 
     length = 0
     for j in range(i, len(height)):
         length += height[j] - h
-    if length >= M:
-        min_h = h
-        # 반복문 중지. 최대의 H를 찾는 것이므로 밑 높이에 대해선 고려하지 않아도 된다.
+        # 더하면서 계산
+        if length >= M:
+            min_h = h
+            print(h)
+            break
+    if min_h != 0:
         break
-print(min_h)
