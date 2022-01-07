@@ -18,9 +18,9 @@ def binary_search(arr, target, start, end):
 
 
 N = int(input()) # 숫자 카드 N개. N은 최대 50만개
-arr1 = map(int, input().split())
+arr1 = list(map(int, input().split()))
 M = int(input()) # 정수 M개. M도 최대 50만개
-arr2 = map(int, input().split()) # 수 하나의 범위는 -1000만 ~ 1000만
+arr2 = list(map(int, input().split())) # 수 하나의 범위는 -1000만 ~ 1000만
 
 # 이진탐색의 전제조건 : sorting!
 arr1 = sorted(arr1)
