@@ -8,6 +8,7 @@ load_ws = load_wb['Sheet1']
 # 모든 행과 열 데이터 출력
 all_values = []
 
+before_row_value = []
 for row in load_ws.rows:
     row_value = []
     for (index, cell) in enumerate(row):
@@ -29,6 +30,8 @@ for row in load_ws.rows:
                         .replace('.', "")\
                         .replace("\\", "")\
                         .replace("'", "")\
+                        .replace("-", "")\
+                        .replace("‘", "")\
                         .encode().isalnum() or "http://" in keyword:
                     # print("영어당")
                     continue
@@ -43,8 +46,19 @@ for row in load_ws.rows:
                 if idx != len(result) - 1:
                     result_str += ", "
             cell.value = result_str
-        row_value.append(cell.value)
-    all_values.append(row_value)
+        row_value.append(cell.value.replace(" ", "").replace("  ", ""))
+
+    if row_value[2] == "":
+        continue
+    elif before_row_value != [] and before_row_value[1] == row_value[0] and before_row_value[2].replace(" ", "") == row_value[2].replace(" ", ""):
+        continue
+    elif before_row_value == row_value:
+        continue
+    elif before_row_value != [] and before_row_value[2] == row_value[2]:
+        continue
+    else:
+        all_values.append(row_value)
+        before_row_value = row_value
 
 # 이제 다시 파일 쓰자.
 write_wb = Workbook()
