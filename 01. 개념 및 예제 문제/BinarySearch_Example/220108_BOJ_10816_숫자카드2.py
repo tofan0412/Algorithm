@@ -1,42 +1,33 @@
 # SILVER4
-# 정수 M개가 주어졌을 때, N개 중 이 수가 적혀 있는 숫자 카드는 몇개인지
-# 구하는 프로그램 작성
-import sys
-
-def binary_search(arr, target, start, end):
-    global cnt
-    if start > end:
-        return -1
-
-    mid = (start + end) // 2
-
-    if arr[mid] == target:
-        cnt += 1
-
-    # 하나를 찾더라도 나머지 역시 진행되어야 한다.
-    # 오른쪽 부분에 대해 이진 탐색
-    binary_search(arr, target, mid+1, end)
-    # 왼쪽 부분에 대해 이진 탐색
-    binary_search(arr, target, start, mid-1)
-
-
+# 시간초과 해법 : card의 중복을 미리 count 해두고 해당하는 card를 이분탐색으로 찾을 때 불러오는 것
+# 결국, cnt_list를 출력 안하고 그냥 그때 그때 출력하는 형식으로 하니까 PASS...
 N = int(input())
-arr1 = sys.stdin.readline().split()
+cards = list(map(int, input().split()))
+cards.sort()
+cardsDic = {}
 M = int(input())
-arr2 = sys.stdin.readline().split()
-result = ''
+nums = list(map(int, input().split()))
 
-arr1 = sorted(arr1)
+for c in cards:
+    if c not in cardsDic:
+        cardsDic[c] = 1
+    else:
+        cardsDic[c] += 1
 
-print(arr1)
+for n in nums:
+    start = 0
+    end = N - 1
 
-for num in arr2:
-    cnt = 0
-    binary_search(arr1, num, 0, len(arr1)-1)
-    result += str(cnt) + ' '
-sys.stdout.write(result)
-# 첫번째 제출 : 시간 초과 -> 출력문 만드는 부분 수정해 봄 -> 시간초과
-# 두번째 제출 이후 : enumerate 아닌 cnt로 카운팅 -> 이래도 시간초과...
-# map 없애고 string 찾는 걸로 변경 -> 시간 초과
-# 대박... arr1 정렬을 안했었음 -> 안됨...
+    while start <= end:
+        mid = (start + end) // 2
+        if cards[mid] == n:
+            break
+        elif cards[mid] > n:
+            end = mid - 1
+        else:
+            start = mid + 1
+    if cards[mid] == n:
+        print(cardsDic[n], end=" ")
+    else:
+        print(0, end=" ")
 
