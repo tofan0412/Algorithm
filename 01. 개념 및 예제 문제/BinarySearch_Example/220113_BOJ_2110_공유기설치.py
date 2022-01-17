@@ -1,4 +1,5 @@
 # GOLD5
+# 참고 코드 : https://hongcoding.tistory.com/3
 def binary_search(arr, start, end):
     global C, setup, min_dis
 
