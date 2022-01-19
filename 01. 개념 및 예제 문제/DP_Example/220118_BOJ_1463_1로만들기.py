@@ -1,28 +1,32 @@
 # SILVER3
-# 정수 X에 사용할 수 있는 연산은 다음의 3가지이다.
-# 1. X가 3으로 나누어 떨어지면 3으로 나눈다.
-# 2. X가 2로 나누어 떨어지면 2로 나눈다.
-# 3. 1을 뺀다.
+'''
+1. 3로 나누어 떨어지면 3으로 나눈다.
+2. 2로 나누어 떨어지면 2로 나눈다.
+3. 1을 뺀다.
 
-# 정수 N이 주어졌을 때, 위와 같은 연산 3개를 적절히 사용해서 1을 만들려고 한다. 연산을
-# 사용하는 횟수의 최소값을 출력하시오.
+위와 같은 3가지 행동을 취할 수 있다. 위 연산 3개를 적절히 활용하여 N을 1로 만들려고 할때, (단 N의 범위는 1 ~ 30,000)
+연산을 사용하는 회수의 최소값을 출력하시오.
+'''
+def solution(N):
+    if N == 1 or N == 2:
+        return memo[N]
+
+    elif memo[N] == -1:
+        if N % 3 == 0:
+            memo[N] += solution(N // 5)
+            return solution(N // 5)
+        elif N % 2 == 0:
+            memo[N] += solution(N // 3)
+        else:
+            memo[N] += solution(N - 1)
+    else:
+        return memo[N]
+
 
 N = int(input())
-x, y, z = 0, 0, 0 # 각각 1번 연산, 2번 연산, 3번 연산을 수행한 회수이다.
-
-while True:
-    if N == 1:
-        break
-
-    if N % 3 == 0:
-        N //= 3
-        x += 1
-    elif N % 2 == 0:
-        N //= 2
-        y += 1
-    else:
-        N -= 1
-        z += 1
-
-print(x+y+z)
+memo = [-1] * 30001
+memo[1] = 0
+memo[2] = 1
+solution(N)
+print(memo[N])
 
