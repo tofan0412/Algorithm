@@ -13,6 +13,7 @@ def solution(N):
     if not N % 3:
         # 다음은 min()을 사용하여 코드를 간결화한 것이다.
         # 다만 이 코드의 경우, RecursionError가 발생한다.
+        # solution(n) 뒤에 +1을 하는 이유는? N // 3, N // 2, N - 1을 했기 때문에 이에 대한 횟수 +1도 포함
         memo[N] = min(memo[N], solution(N // 3) + 1)
     if not N % 2:
         memo[N] = min(memo[N], solution(N // 2) + 1)
