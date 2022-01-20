@@ -1,32 +1,36 @@
 # SILVER3
-'''
-1. 3로 나누어 떨어지면 3으로 나눈다.
-2. 2로 나누어 떨어지면 2로 나눈다.
-3. 1을 뺀다.
-
-위와 같은 3가지 행동을 취할 수 있다. 위 연산 3개를 적절히 활용하여 N을 1로 만들려고 할때, (단 N의 범위는 1 ~ 30,000)
-연산을 사용하는 회수의 최소값을 출력하시오.
-'''
 def solution(N):
     if N == 1 or N == 2:
         return memo[N]
 
-    elif memo[N] == -1:
-        if N % 3 == 0:
-            memo[N] += solution(N // 5)
-            return solution(N // 5)
-        elif N % 2 == 0:
-            memo[N] += solution(N // 3)
-        else:
-            memo[N] += solution(N - 1)
-    else:
+    if memo[N] != 10000005:
         return memo[N]
+
+    if not N % 3:
+        tmp = solution(N // 3) + 1
+        if memo[N] > tmp:
+            memo[N] = tmp
+        # 만약 이미 기존의 최소값보다 더 큰 cnt가 나왔다면? 거기서 중지
+        else:
+            return memo[N]
+    if not N % 2:
+        tmp = solution(N // 2) + 1
+        if memo[N] > tmp:
+            memo[N] = tmp
+        else:
+            return memo[N]
+    if N:
+        tmp = solution(N - 1) + 1
+        if memo[N] > tmp:
+            memo[N] = tmp
+        else:
+            return memo[N]
+    return memo[N]
 
 
 N = int(input())
-memo = [-1] * 30001
+memo = [10000005] * 1000001
 memo[1] = 0
 memo[2] = 1
 solution(N)
 print(memo[N])
-
