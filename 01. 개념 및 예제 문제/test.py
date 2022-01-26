@@ -1,16 +1,14 @@
-prices = [4,5,6,7,8]
-k = 2
+N = int(input())
 
-result = []
-n = len(prices)
+result = ''
+while True:
+    if N == 0:
+        break
 
-def dfs(idx, tmp):
-    if len(tmp) == k:
-        result.append(tmp[:])
-        return
+    left = N % 2
+    result += str(left)
+    N = N // 2
 
-    for i in range(idx, n):
-        dfs(i+1, tmp + [prices[i]])
-
-dfs(0, [])
+result = "".join(reversed(result))
 print(result)
+
