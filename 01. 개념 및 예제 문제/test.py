@@ -1,14 +1,17 @@
-N = int(input())
+T = int(input())
+for tc in range(T):
 
-result = ''
-while True:
-    if N == 0:
-        break
+    N = int(input())
 
-    left = N % 2
-    result += str(left)
-    N = N // 2
+    result = ''
+    while True:
+        if N == 0:
+            break
 
-result = "".join(reversed(result))
-print(result)
+        left = N % 2
+        result += str(left)
+        N = N // 2
+
+    result = "".join(reversed(result))
+    print(result)
 
