@@ -1,4 +1,5 @@
 # SILVER3
+
 N = int(input())
 
 memo = [0] * 91
