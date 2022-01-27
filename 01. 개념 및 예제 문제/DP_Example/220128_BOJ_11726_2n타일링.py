@@ -1,16 +1,17 @@
 # SILVER3
-N = int(input())
+n = int(input())
 
-memo = [0] * 91
-memo[1], memo[2] = 1, 1
+memo = [0] * 1001
+memo[1] = 1
+memo[2] = 2
 
 num = 3
 while True:
-    if memo[N] != 0:
+    if num > n:
         break
 
     memo[num] = memo[num-1] + memo[num-2]
-
     num += 1
 
-print(memo[N])
+print(memo[n] % 10007)
+
