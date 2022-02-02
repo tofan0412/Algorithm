@@ -12,7 +12,6 @@ N = int(input())
 def check(num):
     return int(num ** 0.5) ** 2 == num
 
-
 number = 1
 keep = 0 # 이전에 나온 가장 큰 정수 제곱근
 while True:
