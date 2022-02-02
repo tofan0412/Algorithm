@@ -6,3 +6,11 @@
 N = int(input())
 numbers = list(map(int, input().split()))
 
+# 1. 완전 탐색으로 풀기
+memo = [-1001] * (N + 1)
+for length in range(1, N+1):
+    for index in range(len(numbers)):
+        tmp = sum(numbers[index:index+length])
+        if memo[length] < tmp:
+            memo[length] = tmp
+print(max(memo))
