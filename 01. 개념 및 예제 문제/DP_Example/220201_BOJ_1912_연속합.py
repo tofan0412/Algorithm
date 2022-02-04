@@ -6,7 +6,7 @@
 N = int(input())
 numbers = list(map(int, input().split()))
 
-# 1. 완전 탐색으로 풀기
+# 1. 완전 탐색으로 풀기. 이때 시간 복잡도는 O(N^2)이다.
 memo = [-1001] * (N + 1)
 for length in range(1, N+1):
     for index in range(len(numbers)):
@@ -14,3 +14,4 @@ for length in range(1, N+1):
         if memo[length] < tmp:
             memo[length] = tmp
 print(max(memo))
+
