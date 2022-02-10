@@ -6,12 +6,19 @@
 N = int(input())
 numbers = list(map(int, input().split()))
 
-# 1. 완전 탐색으로 풀기. 이때 시간 복잡도는 O(N^2)이다.
-memo = [-1001] * (N + 1)
-for length in range(1, N+1):
-    for index in range(len(numbers)):
-        tmp = sum(numbers[index:index+length])
-        if memo[length] < tmp:
-            memo[length] = tmp
-print(max(memo))
+# dp[K]는 배열의 첫번째부터 K번째 숫자까지 헤아렸을 때, 나올 수 있는 최대합을 뜻한다.
+# dp[0]의 경우 0번째부터 0번째 숫자까지 고려한 경우이므로, dp[0] = numbers[0]이다.
+dp = [-1] * (N+1)
+dp[0] = numbers[0]
+
+for i in range(1, N+1):
+    dp[i] = max(dp[i-1] + numbers[i], numbers[i])
+
+# ex) [10, -4, 3, 1, 5, 6, -35, 12, 21, -1]인 경우 for문을 생각해 보자.
+# i = 1인 경우 : max(10 + (-4), (-4)) 이므로 dp[1] = 6이 된다.
+# i = 2인 경우 : max(6 + 3, 3) 이므로 dp[2] = 9가 된다.
+# i = 3인 경우 : max(9 + 1, 1) 이므로 dp[3] = 10이 된다.
+# i = 4인 경우 : max(10 + 5, 5) 이므로 dp[4] = 15가 된다.
+# i = 5인 경우 : max(15 + 6, 6) 이므로 dp[5] = 21이 된다.
+# i = 6인 경우 : max(21 + (
 

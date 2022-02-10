@@ -1,5 +1,6 @@
 # SILVER1
 # N번째로 작은, 줄어드는 수를 출력하는 프로그램을 작성하시오.
+import itertools
 
 N = int(input()) # N은 1부터 1,000,000보다 작거나 같은 자연수이다.
 results = []
@@ -15,10 +16,21 @@ results.append(8)
 results.append(9)
 number = 10 # 음이 아닌 정수가 기준이다.
 
-
+# 1~9C(자릿수: 2 ~ 10)
 while True:
     if len(results) >= N or number > 9876543210:
         break
+
+    arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    result = []
+    for number in range(2, 11):
+        # tmp는 여러 개의 튜플이 담긴 리스트이다.
+        tmp = list(itertools.combinations(arr, number))
+
+
+
+
+
 
     num_list = list(str(number))
     result = True
