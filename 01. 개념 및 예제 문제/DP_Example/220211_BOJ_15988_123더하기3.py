@@ -16,5 +16,5 @@ for tc in range(t):
     else:
         for num in range(history+1, n+1):
             dp[num] = (dp[num-1] + dp[num-2] + dp[num-3]) % 1000000009
-            history = n
+        history = n
         print(dp[n])
