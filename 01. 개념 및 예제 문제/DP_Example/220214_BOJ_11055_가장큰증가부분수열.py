@@ -18,3 +18,5 @@ for i in range(1, N):
         d[i] = 1
 
 print(max(d))
+
+# 2. DP를 이용하여 풀어보자.
