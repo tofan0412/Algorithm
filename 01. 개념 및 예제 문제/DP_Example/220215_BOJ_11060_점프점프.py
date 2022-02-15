@@ -4,20 +4,22 @@ N = int(input())
 arr = list(map(int, input().split()))
 
 # dp[k]의 정의 : k번째 발판까지 점프점프하면서 올때, 가능한 최소한의 점프 수.
-dp = [-1] * N
+dp = [100001] * N
 dp[0] = 0
 
-# 생각하지 못한 점 : 반례 -> 0 / 0 0 0 1 0. 처음 발판부터 시작해서 올 수 있어야지, 중간부터 올 수는 없다.
-for i in range(1, N):
-    candidates = [] # i번째 발판에 점프해서 넘어올 수 있는 후보군
-    for j in range(0, i):
-        if arr[j] >= i - j and dp[j] != -1:
-            candidates.append(dp[j])
+# 내가 기존에 생각했던 점: top - down 형식으로 생각했다면..
+# dp 풀이는 bottom - up 방식으로 생각했다는 점이다.
+for now in range(0, N): # now는 현재 위치
+    # 현재 위치 기준으로 점프해서 이동할 수 있는 모든 범위에 대해 생각한다.
+    for jump in range(arr[now]+1):
+        # 점프해서 간 곳의 최소 회수는 해당 칸의 기존 점프 회수와 현재 칸에서 +1한 점프회수를 비교한다.
 
-    # 만약 후보가 없을 경우..?
-    if len(candidates) == 0:
-        dp[i] = -1
-    else:
-        dp[i] = min(candidates) + 1
+        # 점프해서 갈 수 있는 칸이 존재해야 한다.
+        if now + jump < N:
+            dp[now+jump] = min(dp[now + jump], dp[now] + 1)
 
-print(dp[N-1])
+if dp[N-1] == 100001:
+    print(-1)
+else:
+    print(dp[N-1])
+
