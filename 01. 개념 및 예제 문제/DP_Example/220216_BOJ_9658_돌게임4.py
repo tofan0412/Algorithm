@@ -4,4 +4,25 @@
 # 상근이가 먼저 시작한다.
 n = int(input())
 
+# 게임은 완벽하게 진행된다. 즉 내가 이길 수 있는 수만을 놓으려 한다.
+# dp[i]의 정의 : 내 차례에 남은 돌의 개수가 i개일 때, 내가 이기는 지 지는지 여부
+dp = [0] * 1001
+dp[1] = 0
+dp[2] = 1
+dp[3] = 0
+dp[4] = 1
 
+for stone in range(5, n+1):
+    # 내가 1개를 가져갔을 때, 만약 상대방이 이길 수 있는 경우의 수가 없다면 내가 이기는 것이다.
+    if not dp[stone-1]:
+        dp[stone] = 1
+    # 내가 3개를 가져갔을 때, 남은 돌 stone-3개에 대해 상대방이 이길 수 있는 경우의 수가 없다면 내가 이긴 것
+    if not dp[stone-3]:
+        dp[stone] = 1
+    if not dp[stone-4]:
+        dp[stone] = 1
+
+if dp[n]:
+    print('SK')
+else:
+    print('CY')
