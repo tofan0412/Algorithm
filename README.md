@@ -39,6 +39,20 @@
 
 <br>
 
+
+
+## 🤣못푼 문제 목록
+
+- https://www.acmicpc.net/problem/2720 (Greedy)
+- https://www.acmicpc.net/problem/2110 (Binary Search)
+- https://www.acmicpc.net/problem/1874 (Stack)
+- https://www.acmicpc.net/problem/1699 (DP)
+- https://www.acmicpc.net/problem/1699 (DFS, BFS)
+
+
+
+
+
 ## 🍕 commit 메시지 규칙
 
 `<날짜> <문제종류(BOJ, SWEA, programmers..)> <문제번호> <문제 난이도(브론즈, 실버, 골드...)> <분야(그리디, BFS, DP...)> : <문제이름> <패스여부>`  
@@ -54,11 +68,6 @@
 
 👍 해당 문제를 풀었으면 반드시 Beakjoon이나 SWEA에서 제출하고, 통과받을 것
 
-👍 당일 문제를 풀면서 해결 못했다면 반드시 패스여부를 기입하고, Notion에 못푼 문제 목록에 해당 문제를 추가할 것
-
-👍 Notion 링크 : https://www.notion.so/Algorithm-739571cee5eb46b29e6e8ea16d166e60
-
-
-
+👍 관련 Notion 링크 : https://www.notion.so/Algorithm-739571cee5eb46b29e6e8ea16d166e60
 
 
