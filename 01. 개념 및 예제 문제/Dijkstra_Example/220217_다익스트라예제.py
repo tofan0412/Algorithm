@@ -32,21 +32,18 @@ def get_smallest_node():
 
 
 def dijkstra(start):
-    # 시작 노드에 대해서 초기화
     distance[start] = 0
     visited[start] = True
-    for j in graph[start]: # 시작 노드에 인접한 모든 노드에 대해 조사한다.
-        distance[j[0]] = j[1] # 현재 노드를 기준으로, 인접한 노드의 거리값을 계산한다.
+    for j in graph[start]:
+        distance[j[0]] = j[1]
 
-    # 시작 노드를 제외한 전체 n-1개의 노드에 대해 반복한다.
-    # 마지막 노드에 대해선, 마지막 노드를 제외한 나머지 노드를 모두 방문했으므로 거리값을 갱신안해도 된다. (이미 fixed)
     for i in range(n-1):
         now = get_smallest_node()
         visited[now] = True
-        # 현재 노드와 연결된 다른 노드를 확인
+
         for j in graph[now]:
             cost = distance[now] + j[1]
-            # 현재 노드를 거쳐서 다른 노드로 이동하는 거리가 더 짧은 경우
+
             if cost < distance[j[0]]:
                 distance[j[0]] = cost
 
