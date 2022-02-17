@@ -1,90 +1,57 @@
-import heapq
-import sys
 # SILVER2
-# n은 노드의 개수, m은 간선의 개수, k는 기준, start는 시작도시
-input = sys.stdin.readline
-INF = int(1e9)
-
-n, m, k, start = map(int, input().split())
-graph = [[] for _ in range(n+1)]
-visited = [False] * (n+1)
-distance = [INF] * (n+1)
+n, m, k, x = map(int, input().split())
+graph = [[] for _ in range(n+1)] # 노드의 인접정보를 저장한다.
+visited = [False] * (n+1) # 각 노드의 방문 정보
+distance = [int(1e9)] * (n+1) # 기준 노드에서 각 노드까지 이동하는데 필요한 최소 경로
 
 for _ in range(m):
-    city1, city2 = map(int, input().split())
-    graph[city1].append(city2)
+    a, b = map(int, input().split())
+    graph[a].append(b)
 
 
-# def get_smallest_node():
-#     min_value = INF
-#     index = 0
-#     for i in range(n+1):
-#         if not visited[i] and distance[i] < min_value:
-#             min_value = distance[i]
-#             index = i
-#
-#     return index
+def find_smallest_node():
+    min_value = int(1e9)
+    index = 0
+    for node in range(1, n+1):
+        if not visited[node] and distance[node] < min_value:
+            min_value = distance[node]
+            index = node
 
-# O(V^2)의 시간 복잡도
-# def dijkstra(start):
-#     # 1. 기준 노드 방문 처리 및 distance 설정
-#     distance[start] = 0
-#     visited[start] = True
-#
-#     # 2. 기준 노드 주변 인접 노드에 대한 거리값 계산
-#     for v in graph[start]:
-#         distance[v] = 1 # 모든 도로의 거리는 1이며, 기준 노드의 비용은 0이기 때문에 0 + 1이다.
-#
-#     # 3. 거리값 계산했으면 인접한 노드 중에서 방문할 노드를 찾아야 한다.
-#     for i in range(n+1):
-#         now = get_smallest_node()
-#         # 방문할 노드 찾았으면 방문처리
-#         visited[now] = True
-#
-#         # 방문한 노드에 대해 주변 노드 조사하고 다시 거리값 계산
-#         for v in graph[now]:
-#             cost = distance[now] + 1 # start 노드 기준으로 얼마나 비용이 발생하는지 계산해야 한다.
-#
-#             # 코스트 갱신해야 한다.
-#             if cost < distance[v]:
-#                 distance[v] = cost
+    return index
 
 
-# O(ElogV)의 시간복잡도를 갖는 개선된 다익스트라 알고리즘
-def dijkstra2(start):
-    q = []
-    heapq.heappush(q, (0, start)) # 튜플의 첫번째 요소는 해당 노드로 이동하기까지 필요한 비용, 2번째 요소는 노드번호
+def dijkstra(start):
+    # 1. 기준 노드 주변의 인접 노드를 조사하고, distance를 갱신한다.
+    visited[start] = True
     distance[start] = 0
 
-    # 1. 인접 노드를 조사하여, 인접노드에 대한 distance를 수정한다.
-    # 2. 인접 노드 중 비용이 최소화되는 노드를 선택한다.
-    # 3. 해당 노드의 인접 노드에 대해 distance를 갱신한다.
-    # 4. 가장 짧은 노드를 선택하여 heapq.heappush
+    for other_node in graph[start]:
+        distance[other_node] = distance[start] + 1
 
-    while q:
-        dist, now = heapq.heappop(q) # 이 때 now는 (해당 노드 비용, 인덱스)이다.
-
-        # 만약 이미 처리한 적이 있다면 넘어간다.
-        if distance[now] < dist:
-            continue
-        # 2. 인접 노드에 대한 distance를 수정한다.
+    # 노드는 n개 있으면, n번 선택해야 한다.
+    for i in range(1, n+1):
+        now = find_smallest_node()
+        visited[now] = True
+        # now 기준으로 주변 인접 노드를 찾는다.
         for j in graph[now]:
-            cost = distance[now] + 1 # 도로의 가중치는 무조건 1이다.
+            cost = distance[now] + 1
             if cost < distance[j]:
                 distance[j] = cost
-                heapq.heappush(q, (distance[j], j))
 
 
-dijkstra2(start)
+dijkstra(x)
 
 result = []
-for i, dis in enumerate(distance):
-    if dis == k:
+for i, dist in enumerate(distance):
+    if dist == k:
         result.append(i)
 
 if len(result) > 0:
-    for s in result:
-        print(str(s))
+    for i in result:
+        print(i)
 else:
     print(-1)
+
+
+
 
