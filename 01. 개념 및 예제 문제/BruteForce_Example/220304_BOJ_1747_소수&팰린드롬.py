@@ -19,7 +19,7 @@ while True:
 
     is_palindrome = True
     for i in range(mid):
-        if n_str[i] != n_str[-(1 + i)]:
+        if n_str[i] != n_str[-(1 + i)]: # 틀린 원인. 처음에 -1 + i라고 처리함..
             is_palindrome = False
 
     if not is_palindrome:
