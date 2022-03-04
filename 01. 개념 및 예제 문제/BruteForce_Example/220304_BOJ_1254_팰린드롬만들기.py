@@ -1,36 +1,36 @@
 # SILVER1
+def is_palindrome(s):
+    mid = len(s) // 2
+    for i in range(mid):
+        if s[i] != s[-(1+i)]:
+            return False
+    return True
+
+
+def find_palindrome(s): # xyaba에서 aba를 어떻게 찾지? 뒤에 a를 기준으로 찾아야 한다.
+    for i in range(len(s)):
+        if s[i] == s[-1]:
+            # 중간 지점을 기준으로 서로 같은지 비교해보자.
+            if s[i:] == reversed(s[i:]):
+                return i
+    return -1
+
+
 s = list(input())
 # 1. 최초에 팰린드롬인 경우를 검사한다.
-factor = True
-for i in range(len(s) // 2):
-    if s[i] != s[-(1 + i)]:
-        factor = False
-
-if factor:
+if is_palindrome(s):
     print(len(s))
-# 2. 최초에 팰린드롬이 아닌 경우, 하나씩 붙여준다.
 else:
-    idx = len(s) - 2
-    while idx > -1:
-        s.append(s[idx])
-
-        # 붙이고 나서 한번 검사해본다.
-        factor = True
-        for i in range(len(s) // 2):
-            if s[i] != s[-(1 + i)]:
-                factor = False
-                break
-        if factor: # 붙였더니 팰린드롬이 됐다면 해당 길이 출력
-            print(len(s))
-            break
-        else: # 여전히 팰린드롬이 아닌 경우 추가적으로 붙여준다.
-            idx -= 1
-            continue
+    # 2. 최초에 팰린드롬이 아닌 경우. 팰린드롬인 부분을 찾아보자.
 
 
-# 처음에는 문자 전체를 갖다 붙이면 된다고 생각했지만, 반례 존재
-# 문자 abdfhdyrbdbsdfghjkllkjhgfds의 경우 abdfhdyrbdb와 sdfghjkllkjhgfds로 나눌 수 있으며
-# 2번째인 sdfghjkllkjhgfds의 경우 이미 완전히 팰린드롬이다.
-# 따라서 abdfhdyrbdb를 뒤에서부터 하나씩 붙여주면 된다.
 
-# ex. qew'asdfdsa'rby 의 경우 ->
+
+# 1. 팰린드롬인 문자만 존재하는 경우 : aba
+# 2. 팰린드롬인 부분 문자열이 좌측에 위치하는 경우 : aba'xy
+# 3. 팰린드롬인 부분 문자열이 우측에 위치하는 경우 : xy'aba
+# 4. 팬린드롬인 부분이 존재하지 않는 경우 : asdf
+
+# 2의 경우 결국 abaxyxaba와 같이 작성해야 한다.
+# 3의 경우 팰린드롬이 아닌 부분만 뒤에 붙이면 된다. 따라서 xyabayx가 된다.
+# 4의 경우 전체를 반복해야 한다. 따라서 asdfdsa가 된다.
