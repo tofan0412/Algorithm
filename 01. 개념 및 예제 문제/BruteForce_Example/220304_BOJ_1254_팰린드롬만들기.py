@@ -8,12 +8,21 @@ def is_palindrome(s):
 
 
 def find_palindrome(s): # xyaba에서 aba를 어떻게 찾지? 뒤에 a를 기준으로 찾아야 한다.
+    a = 3
     for i in range(len(s)):
-        if s[i] == s[-1]:
+        if s[i] == s[-1] and i != len(s) - 1:
             # 중간 지점을 기준으로 서로 같은지 비교해보자.
-            if s[i:] == reversed(s[i:]):
+            s_rev = list(reversed(s[i:]))
+            if s[i:] == s_rev:
                 return i
     return -1
+
+
+def make_palindrome(s, i):
+    while i > -1:
+        s.append(s[i])
+        i -= 1
+    return s
 
 
 s = list(input())
@@ -22,9 +31,15 @@ if is_palindrome(s):
     print(len(s))
 else:
     # 2. 최초에 팰린드롬이 아닌 경우. 팰린드롬인 부분을 찾아보자.
+    res = find_palindrome(s) - 1 # -1을 반환하거나, 팰린드롬이 시작하는 부분의 인덱스를 반환한다.
 
+    result = ''
+    if res >= 0:
+        result = make_palindrome(s, res)
+    else:
+        result = make_palindrome(s, len(s) - 2)
 
-
+    print(len(result))
 
 # 1. 팰린드롬인 문자만 존재하는 경우 : aba
 # 2. 팰린드롬인 부분 문자열이 좌측에 위치하는 경우 : aba'xy
