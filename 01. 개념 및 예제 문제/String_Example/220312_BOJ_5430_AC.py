@@ -17,19 +17,4 @@ for tc in range(T):
 
     # 이제 각 함수를 수행하자.
     ans = True
-    for func in p:
-        if func == "R":
-            # 배열을 뒤집는다.
-            numbers.reverse() # 이 부분이 시간초과 발생
-        elif func == "D":
-            # 배열이 비어있는 경우, 에러를 출력한다.
-            if len(numbers) == 0:
-                print("error")
-                ans = False
-                break
-            else:
-                # 배열의 첫번째 값을 제거한다.
-                numbers.pop(0)
-    if ans:
-        print(numbers)
-
+    # 풀이) reverse를 아예 잊어버려야 한다.
