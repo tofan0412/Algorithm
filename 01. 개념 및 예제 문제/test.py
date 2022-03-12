@@ -29,4 +29,6 @@ def solution(money, costs):  # money는 생산해야 하는 금액, costs는 생
         money = rest_money
     return answer
 
-print(solution(1999, [2,11, 20, 100, 200, 600]))
+
+# print(solution(1999, [2,11, 20, 100, 200, 600]))
+print(solution(4578, [1, 4, 99, 35, 50, 1000]))
