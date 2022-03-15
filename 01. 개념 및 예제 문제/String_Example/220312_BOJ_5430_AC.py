@@ -1,20 +1,33 @@
-# GOLD5
-T = int(input())
-for tc in range(T):
-    p = input() # 수행할 함수
-    n = int(input()) # 배열에 들어있는 수의 개수
-    numbers = input()
+import sys
+from collections import deque
+t = int(input())
 
-    numbers = numbers.replace("[", "")
-    numbers = numbers.replace("]", "")
+for _ in range(t):
+    p = list(sys.stdin.readline())
+    n = int(input())
+    x = sys.stdin.readline()
 
-    # 이렇게 처리했는데 만약 numbers가 ''가 나온다면?
-    if numbers == '':
+    di = 1
+    try:
+        if n == 0:
+            x = []
+        else:
+            x = deque(list(map(int, x.strip()[1:-1].split(','))))
+
+        for i in p:
+            if i == 'R':
+                di *= -1
+            elif i == 'D':
+                if x:
+                    if di == 1:
+                        x.popleft()
+                    else:
+                        x.pop()
+                else:
+                    raise ValueError
+    except ValueError:
         print("error")
-        continue
     else:
-        numbers = list(map(int, numbers.split(",")))
-
-    # 이제 각 함수를 수행하자.
-    ans = True
-    # 풀이) reverse를 아예 잊어버려야 한다.
+        if di == -1:
+            x = reversed(x)
+        print("[" + ",".join(list(map(str, x))) + "]")
