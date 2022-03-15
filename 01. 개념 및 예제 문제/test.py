@@ -1,55 +1,34 @@
-def solution(rsp3):  # rsp3의 최대 길이는 10만
-    score = [0] * 3
-    for race in rsp3:
-        # 1. 모두 같은 경우
-        if race[0] == race[1] == race[2]:
-            continue
-        # 2. 모두 다른 경우
-        if race[0] != race[1] and race[1] != race[2] and race[0] != race[2]:
-            continue
+# 동전의 종류는 6가지. 동전을 생산하는 공장
+# 최소 비용으로 그 금액만큼 동전을 생산하고자 한다. 
+# 각 단위로 생산할 수 있는 금액까지 최대로 생산을 했을 때, 필요한 비용을 계산
+def solution(money, costs):  # money는 생산해야 하는 금액, costs는 생산 단가 리스트
+    coins = [1, 5, 10, 50, 100, 500]
+    answer = 0  # 최종 정답
 
-        # 이외의 경우는 2개는 같고, 하나만 다른 경우이다. => 6가지
-        rsp = [0] * 3  # R, S, P
-        for s in race:
-            if s == 'R':
-                rsp[0] += 1
-            elif s == 'S':
-                rsp[1] += 1
-            else:
-                rsp[2] += 1
+    while True:
+        # 종료 조건 : 남은 money가 없다면..
+        if money == 0:
+            break
 
-        winner = ''
-        # 승자는 바위
-        if rsp == [2, 1, 0] or rsp == [1, 2, 0]:
-            winner = 'R'
-        # 승자는 보
-        elif rsp == [2, 0, 1] or rsp == [1, 0, 2]:
-            winner = 'P'
-        # 승자는 가위
-        elif rsp == [0, 2, 1] or rsp == [0, 1, 2]:
-            winner = 'S'
+        min_cost = int(1e9)
+        rest_money = int(1e9)
 
-        winner_idx = []
-        for i in range(len(race)):
-            if race[i] == winner:
-                winner_idx.append(i)
+        for i in range(6):  # costs는 1원, 5원, 10원, 100원, 500원
+            # 1. 각 단위 동전당 필요한 개수 계산
+            cnt = money // coins[i]
+            rest = money % coins[i]
+            # 2. 각 단위 동전당 필요한 금액 계산
+            total_cost = cnt * costs[i]
+            # 3. 최소 생산 금액 구하기
+            if min_cost > total_cost and cnt > 0:
+                min_cost = total_cost
+                rest_money = rest
 
-        # 1명이 이긴 경우에는 2점
-        if len(winner_idx) == 1:
-            score[winner_idx[0]] += 2
-        # 2명이 이긴 경우에는 누적 점수를 비교해야 한다.
-        else:
-            if score[winner_idx[0]] == score[winner_idx[1]]:
-                score[winner_idx[0]] += 1
-                score[winner_idx[1]] += 1
-            else:
-                # 현재 누적 점수가 다른 사람이 final_winner
-                if score[winner_idx[0]] > score[winner_idx[1]]:
-                    score[winner_idx[1]] += 2
-                elif score[winner_idx[0]] < score[winner_idx[1]]:
-                    score[winner_idx[0]] += 2
-    return score
+        # 여기로 오면 각 동전당 필요한 생산 비용 중, 그 비용이 최소인 동전이 결정된다.
+        answer += min_cost
+        money = rest_money
+    return answer
 
 
-print(solution(["SSP", "PPS", "SSP", "RPP", "PRP"]))
-
+# print(solution(1999, [2,11, 20, 100, 200, 600]))
+print(solution(4578, [1, 4, 99, 35, 50, 1000]))
