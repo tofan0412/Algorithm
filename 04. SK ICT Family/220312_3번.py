@@ -12,4 +12,16 @@ width : 2, height : 2, diagonals : [[1, 1], [2, 2]] -> result : 12
 width : 51, height : 37, diagonals : [[17, 19]] -> result : 3225685
 
 모든 경우의 수를 특정값으로 나눈 값을 출력해라..
+
+Ans)
+양 대각선 끝점까지 갈 수 있는 경우의 수를 먼저 계산한다. 양 끝점을 A, B라 하자.
+이후 A, B에서 갈 수 있는
 '''
+
+
+
+def solution(width, height, diagonals):
+
+
+
+solution(2, 2, [[1,1], [2,2]])
