@@ -20,7 +20,7 @@ def bfs(arr, point, m, n, h): # point는 layer, row, col 순이다.
     while queue:
         layer, nr, nc = queue.popleft()
 
-        # 1. 한 layer에 대해 사방탐색
+        # 1. 한 layer에 대해 사방탐색 
         for way in range(4):
             gr = nr + dr[way]
             gc = nc + dc[way]
