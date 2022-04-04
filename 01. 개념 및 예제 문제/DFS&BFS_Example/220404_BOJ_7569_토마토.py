@@ -30,10 +30,11 @@ def bfs(arr, point, m, n, h): # point는 layer, row, col 순이다.
                     queue.append((layer, gr, gc))
                     visited[layer][gr][gc] = True
 
-        # 2. 인접한 양 layer에 대해 탐색
+        # 2. 인접한 양 layer에 대해 탐색.
         for way in range(2):
             gh = layer + dh[way]
 
+            # IndexError 검사
             if 0 <= gh < h:
                 if arr[gh][nr][nc] == 0 and not visited[gh][nr][nc]:
                     queue.append((gh, nr, nc))
