@@ -11,14 +11,22 @@ def bfs(arr, point, m, n, h): # point는 layer, row, col 순이다.
     queue = deque()
 
     queue.append(point)
+    queue.append((-99, -99, -99)) # 일수를 카운트하기 위한 대상이다.
     visited[point[0]][point[1]][point[2]] = True
 
     dr = [-1, 1, 0, 0]
     dc = [0, 0, -1, 1]
     dh = [-1, 1]
 
+    # Queue에다가 하루가 지났음을 알리는 대상을 넣자.
+    day = 0
+
     while queue:
         layer, nr, nc = queue.popleft()
+
+        if layer == nr == nc == -99:
+            day += 1
+            continue
 
         # 1. 한 layer에 대해 사방탐색
         for way in range(4):
@@ -40,7 +48,7 @@ def bfs(arr, point, m, n, h): # point는 layer, row, col 순이다.
                     queue.append((gh, nr, nc))
                     visited[gh][nr][nc] = True
 
-
+    return
 M, N, H = map(int, sys.stdin.readline().rstrip().split())
 # m은 width, n은 row, h는 height를 의미한다.
 arr = []
