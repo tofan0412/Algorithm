@@ -19,6 +19,7 @@ def bfs(arr, point, m, n, h): # point는 layer, row, col 순이다.
     dh = [-1, 1]
 
     # Queue에다가 하루가 지났음을 알리는 대상을 넣자.
+    # 토마토가 모두 익었다는 건, queue에 더이상 대상이 없다는 뜻이다.
     day = 0
 
     while queue:
@@ -47,8 +48,16 @@ def bfs(arr, point, m, n, h): # point는 layer, row, col 순이다.
                 if arr[gh][nr][nc] == 0 and not visited[gh][nr][nc]:
                     queue.append((gh, nr, nc))
                     visited[gh][nr][nc] = True
+    # Queue에 대한 사방 탐색이 끝난 이후, 검사해야 한다.
+    # 1. 모든 토마토가 익어있는가?
+    # 2. 토마토가 모두 익지 못하는 상황인가?
+    is_ripen = False
 
-    return
+
+def check_ripend()
+
+
+
 M, N, H = map(int, sys.stdin.readline().rstrip().split())
 # m은 width, n은 row, h는 height를 의미한다.
 arr = []
